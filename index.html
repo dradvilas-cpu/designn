@@ -1,0 +1,2160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Deividas — Digital Marketing Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #C9BFA8;
+    --bg-2: #B8AE96;
+    --ink: #1A1714;
+    --ink-soft: #3A332B;
+    --ink-mute: #6B6354;
+    --ivory: #F2EDE2;
+    --ivory-2: #E8E1D1;
+    --ember: oklch(0.65 0.18 38);
+    --ember-deep: oklch(0.55 0.19 35);
+    --line: rgba(26, 23, 20, 0.18);
+    --line-strong: rgba(26, 23, 20, 0.45);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  .serif { font-family: 'Cormorant Garamond', serif; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  /* ---------- NAV ---------- */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    backdrop-filter: blur(8px);
+    background: rgba(201, 191, 168, 0.85);
+    border-bottom: 1px solid var(--line);
+    transition: all 0.3s ease;
+  }
+  .topbar-inner {
+    max-width: 1440px; margin: 0 auto;
+    padding: 14px 48px 16px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    column-gap: 32px;
+    row-gap: 6px;
+    align-items: center;
+  }
+  .topbar-eyebrow {
+    grid-column: 1 / 2; grid-row: 1 / 2;
+    font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--ink-mute); font-weight: 500;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .topbar-eyebrow .dot-sep { color: var(--ember); }
+  .brand {
+    grid-column: 1 / 2; grid-row: 2 / 3;
+    font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600;
+    letter-spacing: -0.02em; color: var(--ink); text-decoration: none;
+    line-height: 1;
+  }
+  .brand .dot { color: var(--ember); }
+  .topbar-right {
+    grid-column: 2 / 3; grid-row: 1 / 3;
+    display: flex; align-items: center; gap: 36px;
+  }
+  .nav-links { display: flex; gap: 36px; align-items: center; }
+  .nav-links a {
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-soft); text-decoration: none; font-weight: 500;
+    transition: color 0.2s; position: relative;
+  }
+  .nav-links a:hover { color: var(--ember); }
+  .nav-links a.active { color: var(--ink); }
+  .nav-links a.active::before {
+    content: ''; position: absolute; left: -10px; top: 50%; transform: translateY(-50%);
+    width: 4px; height: 4px; background: var(--ember); border-radius: 50%;
+  }
+  .cta-btn {
+    background: var(--ink); color: var(--ivory); border: none;
+    padding: 12px 22px; font-size: 11px; letter-spacing: 0.22em;
+    text-transform: uppercase; font-weight: 600; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .cta-btn:hover { background: var(--ember); }
+  .cta-btn .arrow { transition: transform 0.2s; }
+  .cta-btn:hover .arrow { transform: translate(2px, -2px); }
+
+  /* ---------- SCROLL PROGRESS ---------- */
+  .scroll-progress {
+    position: fixed; top: 0; left: 0; right: 0; height: 2px;
+    background: transparent; z-index: 101;
+  }
+  .scroll-progress-bar {
+    height: 100%; background: var(--ember); width: 0%;
+    transition: width 0.05s linear;
+  }
+
+  /* ---------- GRAIN OVERLAY ---------- */
+  .grain {
+    position: fixed; inset: -50%;
+    pointer-events: none; z-index: 200;
+    opacity: 0.06;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    animation: grain 8s steps(8) infinite;
+  }
+  @keyframes grain {
+    0%, 100% { transform: translate(0,0); }
+    10% { transform: translate(-5%,-3%); }
+    20% { transform: translate(-8%,2%); }
+    30% { transform: translate(3%,-7%); }
+    40% { transform: translate(-3%,5%); }
+    50% { transform: translate(-7%,-1%); }
+    60% { transform: translate(5%,3%); }
+    70% { transform: translate(-2%,-5%); }
+    80% { transform: translate(7%,2%); }
+    90% { transform: translate(-4%,4%); }
+  }
+
+  /* ---------- MAGNETIC + TILT ---------- */
+  .magnetic { transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.2); will-change: transform; }
+  .tilt-card { transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.2); transform-style: preserve-3d; will-change: transform; }
+
+  /* ---------- HERO TITLE LETTER HOVER ---------- */
+  .hero-title .letter {
+    display: inline-block;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s;
+  }
+  .hero-title .letter:hover {
+    transform: translateY(-12px) rotate(-3deg);
+    color: var(--ember);
+  }
+
+  /* ---------- PROJECT CARD MARQUEE ON HOVER ---------- */
+  .project-card { position: relative; overflow: hidden; transition: border-color 0.3s, background 0.3s; }
+  .project-card:hover { border-color: var(--ember); background: rgba(255, 89, 51, 0.04); }
+  .project-card .hover-marquee {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: var(--ember); color: var(--ink);
+    padding: 10px 0; overflow: hidden;
+    transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+    border-top: 1px solid var(--ember);
+  }
+  .project-card:hover .hover-marquee { transform: translateY(0); }
+  .project-card .hover-marquee-track {
+    display: inline-flex; gap: 32px; white-space: nowrap;
+    animation: scroll 18s linear infinite;
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    font-weight: 600;
+  }
+  .project-card .hover-marquee-track span { display: inline-flex; align-items: center; gap: 32px; }
+  .project-card .hover-marquee .d { width: 5px; height: 5px; background: var(--ink); transform: rotate(45deg); display: inline-block; }
+
+  /* ---------- TICKER ---------- */
+  .ticker-strip {
+    background: var(--ink); color: var(--ivory);
+    overflow: hidden; padding: 14px 0;
+    border-top: 1px solid var(--line-strong);
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .ticker-track {
+    display: flex; gap: 48px; white-space: nowrap;
+    animation: scroll 40s linear infinite;
+  }
+  .ticker-track span {
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    font-weight: 500; display: inline-flex; align-items: center; gap: 48px;
+  }
+  .ticker-track .diamond {
+    width: 6px; height: 6px; background: var(--ember);
+    transform: rotate(45deg); display: inline-block;
+  }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    min-height: 100vh; padding-top: 88px;
+    display: grid; grid-template-columns: 1.1fr 1fr;
+    position: relative;
+  }
+  .hero-left {
+    padding: 80px 80px 60px 80px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative;
+  }
+  .eyebrow {
+    font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--ink-mute); font-weight: 500; margin-bottom: 28px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .eyebrow .diamond { width: 5px; height: 5px; background: var(--ember); transform: rotate(45deg); }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(72px, 9vw, 144px);
+    line-height: 0.92; font-weight: 500;
+    letter-spacing: -0.03em; margin-bottom: 36px;
+  }
+  .hero-title .em {
+    font-style: italic; font-weight: 500;
+    color: var(--ember); display: block;
+  }
+  .hero-desc {
+    font-size: 17px; line-height: 1.65; color: var(--ink-soft);
+    max-width: 480px; margin-bottom: 44px;
+  }
+  .hero-actions { display: flex; gap: 14px; margin-bottom: 64px; }
+  .btn-secondary {
+    background: transparent; color: var(--ink); border: 1px solid var(--ink);
+    padding: 12px 22px; font-size: 11px; letter-spacing: 0.22em;
+    text-transform: uppercase; font-weight: 600; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { background: var(--ink); color: var(--ivory); }
+
+  .hero-divider { height: 1px; background: var(--line-strong); margin-bottom: 24px; }
+  .hero-meta {
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+
+  .hero-right {
+    background: var(--bg-2);
+    padding: 80px 80px 60px 60px;
+    display: flex; flex-direction: column; gap: 32px;
+    position: relative;
+  }
+  .portrait {
+    aspect-ratio: 4 / 5; max-width: 460px;
+    background: linear-gradient(135deg, #2A2520 0%, #4A3E32 100%);
+    position: relative; overflow: hidden;
+    border: 1px solid var(--line-strong);
+  }
+  .portrait-placeholder {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(242, 237, 226, 0.6);
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent, transparent 14px,
+      rgba(242, 237, 226, 0.04) 14px, rgba(242, 237, 226, 0.04) 15px
+    );
+  }
+  .testimonial-card {
+    background: var(--ivory);
+    padding: 28px 32px;
+    max-width: 380px;
+    border: 1px solid var(--line);
+    box-shadow: 0 1px 0 rgba(26,23,20,0.06);
+  }
+  .testimonial-card p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px; font-style: italic; line-height: 1.4;
+    color: var(--ink); margin-bottom: 14px;
+  }
+  .testimonial-card .author {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-mute); font-weight: 500;
+  }
+
+  /* ---------- STATS BAR ---------- */
+  .stats-bar {
+    display: grid; grid-template-columns: repeat(3, 1fr) auto;
+    border-top: 1px solid var(--line-strong);
+    border-bottom: 1px solid var(--line-strong);
+    background: var(--bg);
+  }
+  .stat {
+    padding: 24px 40px;
+    border-right: 1px solid var(--line);
+    display: flex; align-items: baseline; gap: 16px;
+  }
+  .stat:last-of-type { border-right: none; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px; font-weight: 600; line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .stat-label {
+    font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--ink-mute); font-weight: 500;
+  }
+  .scroll-indicator {
+    padding: 24px 40px;
+    display: flex; align-items: center; gap: 10px;
+    font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--ink-mute); font-weight: 500;
+  }
+  .scroll-arrow {
+    width: 16px; height: 16px;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(4px); }
+  }
+
+  /* ---------- SECTION HEADER ---------- */
+  .section { padding: 120px 80px; position: relative; }
+  .section-tag {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-mute); margin-bottom: 80px;
+    display: flex; align-items: baseline; gap: 4px;
+    font-weight: 500;
+  }
+  .section-tag .num {
+    font-size: 11px; vertical-align: super; color: var(--ember);
+    font-family: 'Inter', sans-serif; letter-spacing: 0;
+  }
+  .section-tag::before {
+    content: ''; width: 40px; height: 1px; background: var(--ink);
+    margin-right: 18px; align-self: center;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid {
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px;
+    margin-bottom: 80px;
+  }
+  .about-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 6vw, 88px);
+    line-height: 0.98; font-weight: 500;
+    letter-spacing: -0.025em;
+  }
+  .about-title .em { font-style: italic; color: var(--ember); }
+  .about-body p {
+    font-size: 16px; line-height: 1.75; color: var(--ink-soft);
+    margin-bottom: 20px;
+  }
+  .competencies { margin-top: 60px; padding-top: 60px; border-top: 1px solid var(--line-strong); }
+  .competencies-label {
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--ink-mute); margin-bottom: 30px; font-weight: 500;
+  }
+  .skill-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 60px;
+  }
+  .skill-col h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-mute); margin-bottom: 18px; font-weight: 500;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-tag {
+    padding: 8px 16px;
+    border: 1px solid var(--line-strong);
+    font-size: 12px; letter-spacing: 0.06em;
+    background: transparent; color: var(--ink);
+    transition: all 0.2s;
+  }
+  .skill-tag:hover { background: var(--ink); color: var(--ivory); border-color: var(--ink); }
+  .skill-tag.primary { background: var(--ink); color: var(--ivory); border-color: var(--ink); }
+  .skill-tag.primary:hover { background: var(--ember); border-color: var(--ember); }
+
+  /* ---------- PROJECTS ---------- */
+  .projects-section { background: var(--ink); color: var(--ivory); }
+  .projects-section .section-tag { color: rgba(242, 237, 226, 0.5); }
+  .projects-section .section-tag::before { background: var(--ivory); }
+  .projects-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 60px;
+  }
+  .projects-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 6vw, 88px); font-weight: 500;
+    line-height: 0.98; letter-spacing: -0.025em;
+  }
+  .projects-title .em { font-style: italic; color: var(--ember); }
+  .carousel-controls { display: flex; gap: 8px; }
+  .carousel-btn {
+    width: 56px; height: 56px;
+    border: 1px solid rgba(242, 237, 226, 0.25);
+    background: transparent; color: var(--ivory);
+    cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif; font-size: 22px;
+  }
+  .carousel-btn:hover { background: var(--ember); border-color: var(--ember); }
+  .carousel-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+  .carousel-viewport { overflow: hidden; }
+  .carousel-track {
+    display: flex; gap: 32px;
+    transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .project-card {
+    flex: 0 0 calc(50% - 16px);
+    background: rgba(242, 237, 226, 0.04);
+    border: 1px solid rgba(242, 237, 226, 0.12);
+    padding: 40px;
+    display: flex; flex-direction: column;
+    min-height: 540px;
+    height: auto;
+  }
+  .project-meta {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 24px; padding-bottom: 24px;
+    border-bottom: 1px solid rgba(242, 237, 226, 0.12);
+  }
+  .project-cat {
+    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--ember); font-weight: 600;
+  }
+  .project-year {
+    font-family: 'Cormorant Garamond', serif; font-size: 18px;
+    color: rgba(242, 237, 226, 0.6);
+  }
+  .project-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px; line-height: 1.05; font-weight: 500;
+    letter-spacing: -0.02em; margin-bottom: 20px;
+  }
+  .project-desc {
+    font-size: 14px; line-height: 1.65; color: rgba(242, 237, 226, 0.7);
+    margin-bottom: 24px;
+  }
+  /* Project image upload row */
+  .project-images {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 8px; margin-bottom: 24px;
+  }
+  .project-image-slot {
+    aspect-ratio: 4/3;
+    border: 1px dashed rgba(242, 237, 226, 0.2);
+    background: rgba(242, 237, 226, 0.03);
+    position: relative; overflow: hidden;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .project-image-slot:hover {
+    border-color: var(--ember);
+    background: rgba(255, 89, 51, 0.08);
+  }
+  .project-image-slot .placeholder-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(242, 237, 226, 0.35); text-align: center;
+    padding: 4px 8px;
+  }
+  .project-image-slot img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .project-image-slot .remove-img {
+    position: absolute; top: 6px; right: 6px;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: rgba(26, 23, 20, 0.85); color: var(--ivory);
+    border: none; cursor: pointer; opacity: 0;
+    transition: opacity 0.2s; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 2;
+  }
+  .project-image-slot:hover .remove-img { opacity: 1; }
+  .project-image-slot input[type=file] { display: none; }
+  .project-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    padding: 20px 0; margin-bottom: 20px;
+    border-top: 1px solid rgba(242, 237, 226, 0.12);
+    border-bottom: 1px solid rgba(242, 237, 226, 0.12);
+  }
+  .project-stats:has(> div:nth-child(4)) { grid-template-columns: repeat(4, 1fr); }
+  .project-stats.two-col { grid-template-columns: repeat(2, 1fr); }
+  .project-insights {
+    list-style: none; display: flex; flex-direction: column; gap: 8px;
+    margin: 0 0 20px 0; padding: 0;
+  }
+  .project-insights li {
+    font-size: 13px; line-height: 1.6; color: rgba(242, 237, 226, 0.75);
+    display: flex; align-items: flex-start; gap: 12px;
+  }
+  .project-insights li::before {
+    content: ''; width: 5px; height: 5px; background: var(--ember);
+    transform: rotate(45deg); flex-shrink: 0; margin-top: 8px;
+  }
+  .project-stats-label {
+    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(242, 237, 226, 0.45); margin-bottom: 10px; margin-top: 4px; font-weight: 500;
+  }
+  .project-stats + .project-stats-label { margin-top: 4px; }
+  .pstat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px; line-height: 1; font-weight: 600;
+    color: var(--ember); margin-bottom: 6px;
+    letter-spacing: -0.02em;
+  }
+  .pstat-label {
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(242, 237, 226, 0.5); line-height: 1.3;
+  }
+  .project-tools-label {
+    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(242, 237, 226, 0.45); margin-bottom: 12px; font-weight: 500;
+  }
+  .project-tools { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tool-chip {
+    padding: 5px 12px;
+    border: 1px solid rgba(242, 237, 226, 0.2);
+    font-size: 11px; color: rgba(242, 237, 226, 0.8);
+  }
+
+  .carousel-dots {
+    display: flex; gap: 8px; justify-content: center; margin-top: 40px;
+  }
+  .carousel-dot {
+    width: 24px; height: 2px; background: rgba(242, 237, 226, 0.2);
+    border: none; cursor: pointer; transition: all 0.3s;
+  }
+  .carousel-dot.active { background: var(--ember); width: 48px; }
+
+  /* ---------- VISUALS / UPLOAD ---------- */
+  .visuals-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 60px;
+  }
+  .visuals-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 6vw, 88px); font-weight: 500;
+    line-height: 0.98; letter-spacing: -0.025em;
+  }
+  .visuals-title .em { font-style: italic; color: var(--ember); }
+  .upload-zone {
+    border: 1.5px dashed var(--line-strong);
+    padding: 60px 40px;
+    text-align: center;
+    transition: all 0.2s;
+    cursor: pointer;
+    background: rgba(242, 237, 226, 0.3);
+  }
+  .upload-zone:hover, .upload-zone.dragover {
+    border-color: var(--ember);
+    background: rgba(242, 237, 226, 0.5);
+  }
+  .upload-icon {
+    width: 48px; height: 48px; margin: 0 auto 18px;
+    border: 1px solid var(--ink); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .upload-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-style: italic; margin-bottom: 6px;
+  }
+  .upload-sub {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .gallery-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px; margin-top: 40px;
+  }
+  .gallery-item {
+    aspect-ratio: 1;
+    background: var(--bg-2);
+    overflow: hidden; position: relative;
+    cursor: pointer;
+  }
+  .gallery-item img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.4s;
+  }
+  .gallery-item:hover img { transform: scale(1.05); }
+  .gallery-item .remove {
+    position: absolute; top: 8px; right: 8px;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(26, 23, 20, 0.8); color: var(--ivory);
+    border: none; cursor: pointer; opacity: 0;
+    transition: opacity 0.2s; font-size: 14px;
+  }
+  .gallery-item:hover .remove { opacity: 1; }
+
+  /* ---------- LIGHTBOX ---------- */
+  .lightbox {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(26, 23, 20, 0.94);
+    display: none; align-items: center; justify-content: center;
+    padding: 5vh 5vw;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    cursor: zoom-out;
+    opacity: 0; transition: opacity 0.25s ease;
+  }
+  .lightbox.open { display: flex; opacity: 1; }
+  .lightbox img {
+    max-width: 100%; max-height: 100%;
+    object-fit: contain;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    transform: scale(0.96); transition: transform 0.3s cubic-bezier(0.65,0,0.35,1);
+  }
+  .lightbox.open img { transform: scale(1); }
+  .lightbox-close {
+    position: absolute; top: 24px; right: 28px;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(242, 237, 226, 0.12); color: var(--ivory);
+    border: 1px solid rgba(242, 237, 226, 0.2);
+    font-size: 22px; line-height: 1; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .lightbox-close:hover { background: var(--ember); border-color: var(--ember); color: var(--ink); }
+  .lightbox-hint {
+    position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(242, 237, 226, 0.45);
+  }
+  .project-image-slot.has-image { cursor: zoom-in; }
+
+  .gallery-empty {
+    text-align: center; color: var(--ink-mute); font-style: italic;
+    font-family: 'Cormorant Garamond', serif; font-size: 18px;
+    grid-column: 1 / -1; padding: 40px 0;
+  }
+
+  /* ---------- LINEAGE ---------- */
+  .lineage-section { background: var(--ivory); }
+  .lineage-list { max-width: 1100px; margin: 0 auto; }
+  .lineage-item {
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+  }
+  .lineage-item:last-child { border-bottom: none; }
+  .lineage-item.open { background: rgba(201, 191, 168, 0.4); border: 1px solid var(--ember); margin: -1px 0; }
+  .lineage-row {
+    display: grid; grid-template-columns: 60px 1fr auto 40px;
+    gap: 40px; align-items: center;
+    padding: 32px 24px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .lineage-row:hover .lineage-company { color: var(--ember); }
+  .lineage-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; color: var(--ember);
+  }
+  .lineage-content { display: flex; flex-direction: column; gap: 4px; }
+  .lineage-company {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px; font-weight: 500; letter-spacing: -0.02em;
+    transition: color 0.3s;
+  }
+  .lineage-role { font-size: 14px; color: var(--ink-mute); }
+  .lineage-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--ink-mute);
+    letter-spacing: 0.05em;
+  }
+  .lineage-toggle {
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: var(--ink-mute);
+    transition: transform 0.4s;
+  }
+  .lineage-item.open .lineage-toggle { transform: rotate(180deg); color: var(--ember); }
+  .lineage-detail {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .lineage-item.open .lineage-detail { max-height: 1400px; }
+  .lineage-detail-inner {
+    display: grid; grid-template-columns: 60px 1fr 1fr;
+    gap: 40px; padding: 0 24px 36px 24px;
+    align-items: start;
+  }
+  .lineage-detail-inner > .spacer { }
+  .lineage-detail-inner > .lineage-desc { display: flex; flex-direction: column; gap: 14px; max-width: 480px; }
+  .lineage-desc-group { display: flex; flex-direction: column; gap: 14px; max-width: 480px; }
+  .lineage-desc { font-size: 15px; line-height: 1.7; color: var(--ink-soft); max-width: 480px; }
+  .lineage-desc + .lineage-desc { margin-top: 14px; }
+  .lineage-artifacts h5 {
+    font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--ink-mute); margin-bottom: 14px; font-weight: 500;
+  }
+  .lineage-artifacts ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .lineage-artifacts li {
+    font-size: 14px; color: var(--ink); display: flex; align-items: center; gap: 12px;
+  }
+  .lineage-artifacts li::before {
+    content: ''; width: 5px; height: 5px; background: var(--ember);
+    transform: rotate(45deg); flex-shrink: 0;
+  }
+
+  /* ---------- SERVICES ---------- */
+  .services-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+    background: var(--line-strong);
+    border: 1px solid var(--line-strong);
+  }
+  .service-card {
+    background: var(--bg);
+    padding: 48px;
+    transition: background 0.3s;
+    position: relative;
+    min-height: 280px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .service-card:hover { background: var(--ivory); }
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; letter-spacing: 0.2em;
+    color: var(--ember); font-weight: 600;
+    margin-bottom: 28px;
+  }
+  .service-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px; line-height: 1.05; font-weight: 500;
+    letter-spacing: -0.02em; margin-bottom: 18px;
+  }
+  .service-desc {
+    font-size: 14px; line-height: 1.65; color: var(--ink-soft);
+  }
+  .service-arrow {
+    margin-top: 24px;
+    width: 36px; height: 36px;
+    border: 1px solid var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    font-size: 14px;
+    align-self: flex-start;
+  }
+  .service-card:hover .service-arrow {
+    background: var(--ember); border-color: var(--ember); color: var(--ivory);
+    transform: translate(2px, -2px);
+  }
+
+  /* ---------- PROCESS / JOURNEY ---------- */
+  .process-section { background: var(--bg-2); padding-bottom: 160px; }
+  .journey {
+    position: relative;
+    max-width: 1100px; margin: 0 auto;
+    padding: 40px 0;
+  }
+  .journey-path {
+    position: absolute; left: 50%; top: 0; bottom: 0;
+    width: 2px; transform: translateX(-50%);
+    background: repeating-linear-gradient(to bottom, var(--ink) 0 8px, transparent 8px 16px);
+    z-index: 0;
+  }
+  .journey-progress {
+    position: absolute; left: 50%; top: 0;
+    width: 2px; transform: translateX(-50%);
+    background: var(--ember);
+    height: 0%;
+    transition: height 0.2s linear;
+    z-index: 1;
+    box-shadow: 0 0 12px var(--ember);
+  }
+  .journey-step {
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1fr 80px 1fr;
+    align-items: center;
+    padding: 60px 0;
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .journey-step.visible { opacity: 1; transform: translateY(0); }
+  .journey-step:nth-child(even) .journey-card { grid-column: 3; text-align: left; }
+  .journey-step:nth-child(even) .journey-spacer { grid-column: 1; }
+  .journey-step:nth-child(odd) .journey-card { grid-column: 1; text-align: right; }
+  .journey-step:nth-child(odd) .journey-spacer { grid-column: 3; }
+  .journey-marker {
+    grid-column: 2;
+    width: 64px; height: 64px;
+    background: transparent;
+    border: 1.5px solid var(--ember);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ember);
+    margin: 0 auto;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    z-index: 2;
+  }
+  .journey-step.visible .journey-marker {
+    background: rgba(255, 89, 51, 0.06);
+    transform: scale(1.04);
+  }
+  .journey-marker svg { width: 26px; height: 26px; stroke: currentColor; fill: none; stroke-width: 1.6; }
+  .journey-card {
+    padding: 0 40px;
+    position: relative;
+  }
+  .journey-step:nth-child(odd) .journey-card::after,
+  .journey-step:nth-child(even) .journey-card::before {
+    content: ''; position: absolute; top: 50%;
+    width: 30px; height: 1px; background: var(--ember);
+  }
+  .journey-step:nth-child(odd) .journey-card::after { right: 0; }
+  .journey-step:nth-child(even) .journey-card::before { left: 0; }
+  .journey-step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--ember); margin-bottom: 12px; font-weight: 500;
+  }
+  .journey-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px; font-weight: 500; letter-spacing: -0.02em;
+    margin-bottom: 12px; line-height: 1.1;
+  }
+  .journey-desc {
+    font-size: 14px; line-height: 1.65; color: var(--ink-soft);
+  }
+  .journey-meta {
+    display: inline-block; margin-top: 14px;
+    padding: 5px 12px;
+    border: 1px solid var(--line-strong);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .journey-start, .journey-end {
+    text-align: center; position: relative; z-index: 2;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--ink-mute);
+    padding: 24px 0;
+  }
+  .journey-end {
+    color: var(--ember);
+    font-weight: 600;
+  }
+  .journey-end .arrow-down { display: block; font-size: 24px; margin-top: 8px; }
+
+  @media (max-width: 1024px) {
+    .journey-path, .journey-progress { left: 40px; }
+    .journey-step { grid-template-columns: 80px 1fr !important; padding: 32px 0; }
+    .journey-step:nth-child(odd) .journey-card,
+    .journey-step:nth-child(even) .journey-card { grid-column: 2 !important; text-align: left !important; padding: 0 0 0 24px; }
+    .journey-step:nth-child(odd) .journey-spacer,
+    .journey-step:nth-child(even) .journey-spacer { display: none; }
+    .journey-marker { grid-column: 1 !important; width: 56px; height: 56px; }
+    .journey-marker svg { width: 22px; height: 22px; }
+    .journey-step:nth-child(odd) .journey-card::after,
+    .journey-step:nth-child(even) .journey-card::before { display: none; }
+  }
+  .process-step {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px; font-weight: 500;
+    line-height: 1; letter-spacing: -0.03em;
+    margin-bottom: 20px; color: var(--ember);
+    font-style: italic;
+  }
+  .process-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; font-weight: 500;
+    margin-bottom: 14px; letter-spacing: -0.01em;
+  }
+  .process-desc {
+    font-size: 14px; line-height: 1.6; color: var(--ink-soft);
+  }
+
+  /* ---------- VOICES / TESTIMONIALS ---------- */
+  .voices-grid {
+    display: grid; grid-template-columns: 1fr 2fr; gap: 80px;
+    align-items: start;
+  }
+  .voices-stats { display: flex; flex-direction: column; gap: 40px; }
+  .voice-stat {
+    border-top: 1px solid var(--line-strong); padding-top: 24px;
+  }
+  .voice-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 84px; font-weight: 500; line-height: 1;
+    letter-spacing: -0.03em; margin-bottom: 8px;
+  }
+  .voice-stat-label {
+    font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--ink-mute); font-weight: 500;
+  }
+  .testimonial-large {
+    background: var(--ivory);
+    padding: 60px;
+    border: 1px solid var(--line);
+    position: relative;
+    min-height: 360px;
+  }
+  .testimonial-slides { position: relative; }
+  .testimonial-slide {
+    display: none;
+    animation: fadeSlide 0.5s ease;
+  }
+  .testimonial-slide.active { display: block; }
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .testimonial-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 28px; padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+  .testimonial-arrows { display: flex; gap: 8px; }
+  .t-arrow {
+    width: 44px; height: 44px;
+    border: 1px solid var(--line-strong);
+    background: transparent; cursor: pointer;
+    font-family: 'Cormorant Garamond', serif; font-size: 18px;
+    color: var(--ink); transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .t-arrow:hover { background: var(--ember); border-color: var(--ember); color: var(--ivory); }
+  .testimonial-counter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.22em; color: var(--ink-mute);
+  }
+  .testimonial-counter .current { color: var(--ember); font-weight: 600; }
+  .quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 120px; line-height: 0.5;
+    color: var(--ember); position: absolute;
+    top: 48px; left: 60px;
+  }
+  .testimonial-large blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; line-height: 1.45;
+    font-style: italic; padding-top: 60px;
+    margin-bottom: 36px;
+  }
+  .testimonial-attrib {
+    display: flex; align-items: center; gap: 16px;
+    padding-top: 24px; border-top: 1px solid var(--line);
+  }
+  .attrib-mark {
+    width: 48px; height: 48px;
+    background: var(--ink); color: var(--ivory);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif; font-size: 22px;
+    font-weight: 600;
+  }
+  .attrib-name { font-weight: 600; font-size: 15px; }
+  .attrib-role {
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ink-mute); margin-top: 2px;
+  }
+
+  /* ---------- CONTACT / NEXUS ---------- */
+  .nexus-section { background: var(--ink); color: var(--ivory); }
+  .nexus-section .section-tag { color: rgba(242, 237, 226, 0.5); }
+  .nexus-section .section-tag::before { background: var(--ivory); }
+  .nexus-grid {
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 100px;
+  }
+  .nexus-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(56px, 7vw, 110px);
+    font-weight: 500; line-height: 0.95;
+    letter-spacing: -0.025em; margin-bottom: 40px;
+  }
+  .nexus-title .em { font-style: italic; color: var(--ember); }
+  .nexus-desc {
+    font-size: 17px; line-height: 1.65;
+    color: rgba(242, 237, 226, 0.7); margin-bottom: 60px;
+    max-width: 480px;
+  }
+  .contact-info { display: flex; flex-direction: column; gap: 20px; }
+  .contact-item {
+    display: flex; align-items: center; gap: 18px;
+    padding: 20px 0; border-top: 1px solid rgba(242, 237, 226, 0.15);
+    font-size: 15px;
+  }
+  .contact-item:last-child { border-bottom: 1px solid rgba(242, 237, 226, 0.15); }
+  .contact-icon {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(242, 237, 226, 0.25);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ember); font-size: 14px;
+  }
+  .contact-item a { color: var(--ivory); text-decoration: none; transition: color 0.2s; }
+  .contact-item a:hover { color: var(--ember); }
+
+  .form { display: flex; flex-direction: column; gap: 24px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .field label {
+    display: block; font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: rgba(242, 237, 226, 0.5);
+    margin-bottom: 10px; font-weight: 500;
+  }
+  .field input, .field textarea {
+    width: 100%; background: transparent;
+    border: none; border-bottom: 1px solid rgba(242, 237, 226, 0.25);
+    color: var(--ivory); font-family: inherit; font-size: 15px;
+    padding: 12px 0; outline: none;
+    transition: border-color 0.2s;
+  }
+  .field input::placeholder, .field textarea::placeholder { color: rgba(242, 237, 226, 0.3); }
+  .field input:focus, .field textarea:focus { border-bottom-color: var(--ember); }
+  .field textarea { resize: vertical; min-height: 100px; font-family: inherit; }
+  .field.error input, .field.error textarea { border-bottom-color: #E56B5C; }
+  .field-error {
+    color: #E56B5C; font-size: 11px; letter-spacing: 0.1em;
+    margin-top: 6px; display: none;
+  }
+  .field.error .field-error { display: block; }
+
+  .submit-btn {
+    background: var(--ember); color: var(--ivory);
+    border: none; padding: 18px 28px;
+    font-size: 11px; letter-spacing: 0.25em;
+    text-transform: uppercase; font-weight: 600;
+    cursor: pointer; align-self: flex-start;
+    display: inline-flex; align-items: center; gap: 12px;
+    transition: background 0.2s;
+  }
+  .submit-btn:hover { background: var(--ember-deep); }
+  .submit-btn:disabled { opacity: 0.6; cursor: wait; }
+
+  .form-success {
+    background: rgba(110, 200, 130, 0.1);
+    border: 1px solid rgba(110, 200, 130, 0.4);
+    color: #A8E0B0;
+    padding: 16px 20px; font-size: 13px; line-height: 1.5;
+    display: none;
+  }
+  .form-success.show { display: block; }
+
+  /* ---------- FOOTER ---------- */
+  .footer {
+    background: var(--ink); color: rgba(242, 237, 226, 0.7);
+    padding: 48px 80px 32px;
+    border-top: 1px solid rgba(242, 237, 226, 0.1);
+  }
+  .footer-row {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 24px;
+  }
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-weight: 600; color: var(--ivory);
+  }
+  .footer-brand .dot { color: var(--ember); }
+  .footer-social { display: flex; gap: 24px; }
+  .footer-social a {
+    color: rgba(242, 237, 226, 0.6); text-decoration: none;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .footer-social a:hover { color: var(--ember); }
+  .footer-copy {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(242, 237, 226, 0.4);
+  }
+  .back-top {
+    background: transparent; border: 1px solid rgba(242, 237, 226, 0.25);
+    color: var(--ivory); padding: 12px 20px;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s;
+    font-family: inherit;
+  }
+  .back-top:hover { background: var(--ember); border-color: var(--ember); }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* responsive */
+  @media (max-width: 1024px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-left, .hero-right { padding: 60px 40px; }
+    .section { padding: 80px 40px; }
+    .about-grid, .nexus-grid { grid-template-columns: 1fr; gap: 40px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .process-grid { grid-template-columns: 1fr; }
+    .journey-step { grid-template-columns: 80px 1fr; }
+    .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+    .skill-grid { grid-template-columns: 1fr; gap: 32px; }
+    .project-card { flex-basis: calc(100% - 0px); }
+    .voices-grid { grid-template-columns: 1fr; gap: 40px; }
+    .nav-links { display: none; }
+    .footer { padding: 40px 32px; }
+    .topbar-inner { padding: 14px 24px; }
+    .stats-bar { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- scroll progress + grain -->
+<div class="scroll-progress"><div class="scroll-progress-bar" id="scrollProgressBar"></div></div>
+<div class="grain"></div>
+
+<!-- ========== TOPBAR ========== -->
+<nav class="topbar" id="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-eyebrow">
+      SEO <span class="dot-sep">·</span> ADS <span class="dot-sep">·</span> CONTENT <span class="dot-sep">·</span> ANALYTICS <span class="dot-sep">·</span> GROWTH
+    </div>
+    <a href="#top" class="brand">Deividas<span class="dot">.</span></a>
+    <div class="topbar-right">
+      <div class="nav-links">
+        <a href="#about" data-nav>About</a>
+        <a href="#projects" data-nav>Projects</a>
+        <a href="#lineage" data-nav>Experience</a>
+        <a href="#services" data-nav>Services</a>
+        <a href="#nexus" data-nav>Contact</a>
+      </div>
+      <a href="#nexus" class="cta-btn">Let's Talk <span class="arrow">↗</span></a>
+    </div>
+  </div>
+</nav>
+
+<div id="top"></div>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <div class="hero-left">
+    <h1 class="hero-title" style="margin-top: 20px">
+      Building<br>
+      Digital<br>
+      <span class="em">Excellence</span>
+    </h1>
+    <p class="hero-desc">
+      Digital marketing specialist focused on SEO, advertising campaigns, and content optimization. I create and execute strategies that increase brand visibility and drive both organic and paid traffic growth.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="cta-btn">View Projects <span class="arrow">↗</span></a>
+      <a href="#nexus" class="btn-secondary">Get in Touch <span class="arrow">↗</span></a>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-meta">
+      <span>Vilnius · Worldwide</span>
+      <span>Est. 2022</span>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="portrait">
+      <img src="assets/portrait.jpg" alt="Deividas portrait" style="width:100%;height:100%;object-fit:cover;display:block" />
+    </div>
+    <div class="testimonial-card">
+      <p>"Exceptional creativity and attention to detail."</p>
+      <div class="author">— Autoreka</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== STATS BAR ========== -->
+<div class="stats-bar">
+  <div class="stat">
+    <span class="stat-num">3<span style="color:var(--ember)">+</span></span>
+    <span class="stat-label">Years Experience</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">10<span style="color:var(--ember)">+</span></span>
+    <span class="stat-label">Projects Delivered</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">5<span style="color:var(--ember)">+</span></span>
+    <span class="stat-label">Happy Clients</span>
+  </div>
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <svg class="scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ========== TICKER ========== -->
+<div class="ticker-strip">
+  <div class="ticker-track">
+    <span>Brand Visibility <span class="diamond"></span> SEO <span class="diamond"></span> Meta Ads <span class="diamond"></span> Google Ads <span class="diamond"></span> Content Strategy <span class="diamond"></span> Analytics <span class="diamond"></span> Email Automation <span class="diamond"></span> CRO <span class="diamond"></span> Brand Visibility <span class="diamond"></span> SEO <span class="diamond"></span> Meta Ads <span class="diamond"></span> Google Ads <span class="diamond"></span> Content Strategy <span class="diamond"></span> Analytics <span class="diamond"></span> Email Automation <span class="diamond"></span> CRO <span class="diamond"></span></span>
+  </div>
+</div>
+
+<!-- ========== ABOUT ========== -->
+<section class="section" id="about">
+  <div class="section-tag reveal">About<span class="num">01</span></div>
+  <div class="about-grid">
+    <h2 class="about-title reveal">
+      Crafting digital<br>
+      experiences with<br>
+      <span class="em">purpose.</span>
+    </h2>
+    <div class="about-body reveal">
+      <p>I'm a digital marketing manager specializing in SEO, paid advertising, and content optimization. My goal is to help businesses grow by increasing their online visibility, attracting high-quality traffic, and improving conversions.</p>
+      <p>I work with website SEO optimization, including keyword research, on-page structure (Title, Meta, H1–H3), content improvement, and internal linking strategies. I also continuously analyze user behavior to understand what performs best and identify opportunities for improvement.</p>
+      <p>I create and manage advertising campaigns, primarily using Meta Ads, where I test different audiences and creative approaches while optimizing performance based on data. In addition, I implement email marketing solutions from newsletters to automated flows focused on engagement and sales.</p>
+      <p>My decisions are data-driven, using tools like Google Analytics and Search Console. I analyze performance, identify growth opportunities, and continuously optimize processes to achieve measurable results.</p>
+    </div>
+  </div>
+
+  <div class="competencies reveal">
+    <div class="competencies-label">Core Competencies</div>
+    <div class="skill-grid">
+      <div class="skill-col">
+        <h4>Disciplines</h4>
+        <div class="skill-tags">
+          <span class="skill-tag primary">SEO</span>
+          <span class="skill-tag primary">Ads</span>
+          <span class="skill-tag primary">Content</span>
+          <span class="skill-tag primary">Analytics</span>
+          <span class="skill-tag primary">Social Media</span>
+          <span class="skill-tag primary">CRO</span>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h4>Tools &amp; Platforms</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Meta Ads</span>
+          <span class="skill-tag">Google Analytics</span>
+          <span class="skill-tag">Google Ads</span>
+          <span class="skill-tag">Shopify</span>
+          <span class="skill-tag">PrestaShop</span>
+          <span class="skill-tag">Klaviyo</span>
+          <span class="skill-tag">Ahrefs</span>
+          <span class="skill-tag">Canva</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PROJECTS ========== -->
+<section class="section projects-section" id="projects">
+  <div class="section-tag reveal">Projects<span class="num">02</span></div>
+  <div class="projects-header reveal">
+    <h2 class="projects-title">
+      Selected<br>
+      <span class="em">Works</span>
+    </h2>
+    <div class="carousel-controls">
+      <button class="carousel-btn" id="prevBtn" aria-label="Previous">←</button>
+      <button class="carousel-btn" id="nextBtn" aria-label="Next">→</button>
+    </div>
+  </div>
+  <div class="carousel-viewport reveal">
+    <div class="carousel-track" id="carouselTrack">
+      <!-- project 1 -->
+      <article class="project-card">
+        <div class="project-meta">
+          <span class="project-cat">SEO · E-commerce</span>
+          <span class="project-year">2026</span>
+        </div>
+        <h3 class="project-title">E-commerce SEO &amp; Performance Growth</h3>
+        <p class="project-desc">Conducted a full SEO and performance optimization for an e-commerce website, focusing on increasing organic traffic, improving user engagement, and driving conversions.</p>
+        <p class="project-desc">Optimized on-page SEO (Title, Meta, H1–H3), improved site structure, and implemented internal linking strategies. Created and optimized blog content based on keyword research, which increased visibility and user engagement. Additionally, monitored performance and user behavior using analytics tools to continuously refine the strategy.</p>
+        <div class="project-images" data-project="seo">
+          <label class="project-image-slot has-image baked"><input type="file" accept="image/*" /><img src="uploads/Screenshot 2026-02-04 132611.png" alt="GA4 dashboard" /></label>
+          <label class="project-image-slot has-image baked"><input type="file" accept="image/*" /><img src="uploads/Screenshot 2026-02-08 203345.png" alt="GA4 acquisition" /></label>
+          <label class="project-image-slot has-image baked"><input type="file" accept="image/*" /><img src="uploads/Screenshot 2026-01-26 194951.png" alt="GA4 engagement" /></label>
+        </div>
+        <div class="project-stats-label">Results</div>
+        <div class="project-stats">
+          <div><div class="pstat-num">+42.7%</div><div class="pstat-label">Active Users Growth</div></div>
+          <div><div class="pstat-num">+19.2%</div><div class="pstat-label">Website Views</div></div>
+          <div><div class="pstat-num">+23.7%</div><div class="pstat-label">User Engagement</div></div>
+          <div><div class="pstat-num">+13.1%</div><div class="pstat-label">Purchases</div></div>
+        </div>
+        <div class="project-stats-label">Traffic &amp; Engagement</div>
+        <div class="project-stats">
+          <div><div class="pstat-num">10.4K</div><div class="pstat-label">Total Users</div></div>
+          <div><div class="pstat-num">~63%</div><div class="pstat-label">Organic Traffic Share</div></div>
+          <div><div class="pstat-num">1m 40s</div><div class="pstat-label">Avg Engagement Time</div></div>
+        </div>
+        <div class="project-tools-label">Tools</div>
+        <div class="project-tools">
+          <span class="tool-chip">Google Analytics</span>
+          <span class="tool-chip">Google Search Console</span>
+          <span class="tool-chip">Meta Ads Manager</span>
+          <span class="tool-chip">Shopify / PrestaShop</span>
+          <span class="tool-chip">Canva</span>
+          <span class="tool-chip">SEO Tools</span>
+        </div>
+        <div class="hover-marquee"><div class="hover-marquee-track"><span>View Case Study <span class="d"></span> +42.7% Active Users <span class="d"></span> +13.1% Purchases <span class="d"></span> 63% Organic <span class="d"></span> View Case Study <span class="d"></span> +42.7% Active Users <span class="d"></span> +13.1% Purchases <span class="d"></span> 63% Organic <span class="d"></span></span></div></div>
+      </article>
+      <!-- project 2 -->
+      <article class="project-card">
+        <div class="project-meta">
+          <span class="project-cat">Paid Advertising · Social</span>
+          <span class="project-year">2026</span>
+        </div>
+        <h3 class="project-title">Meta Ads Performance Campaign</h3>
+        <p class="project-desc">Built and managed a full-funnel Meta Ads strategy for a fashion e-commerce brand. Structured campaigns across multiple audiences and tested different creative formats, including video and static visuals.</p>
+        <p class="project-desc">Focused on A/B testing ad creatives, copy, and targeting to continuously improve performance. Optimized campaigns based on data to increase conversions and maximize return on ad spend.</p>
+        <div class="project-images" data-project="meta">
+          <label class="project-image-slot has-image baked"><input type="file" accept="image/*" /><img src="uploads/006d54fa-7dd3-418b-baf7-43ae1594ce81.jpg" alt="Meta Ads stats" /></label>
+          <label class="project-image-slot has-image baked"><input type="file" accept="image/*" /><img src="uploads/006d54fa-7dd3-418b-baf7-43ae1594ce81 (1).jpg" alt="Meta Ads campaigns" /></label>
+          <label class="project-image-slot has-image baked"><input type="file" accept="image/*" /><img src="uploads/6793605b-e6b7-4573-8eed-dbdac9c95e3b.jpg" alt="Top performing campaign" /></label>
+        </div>
+        <div class="project-stats-label">Results</div>
+        <div class="project-stats">
+          <div><div class="pstat-num">$3,363</div><div class="pstat-label">Total Ad Spend</div></div>
+          <div><div class="pstat-num">$11,779</div><div class="pstat-label">Revenue Generated</div></div>
+          <div><div class="pstat-num">~3.5×</div><div class="pstat-label">Average ROAS</div></div>
+          <div><div class="pstat-num">433</div><div class="pstat-label">Total Purchases</div></div>
+        </div>
+        <div class="project-stats-label">High-Performing Campaign</div>
+        <div class="project-stats two-col">
+          <div><div class="pstat-num">32× ROAS</div><div class="pstat-label">Top Performing Campaign</div></div>
+          <div><div class="pstat-num">£34,001+</div><div class="pstat-label">Revenue From Single Campaign</div></div>
+        </div>
+        <div class="project-stats-label">Campaign Insights</div>
+        <ul class="project-insights">
+          <li>Tested multiple audience segments and creatives</li>
+          <li>Identified and scaled top-performing campaigns</li>
+          <li>Optimized funnel from click → purchase</li>
+          <li>Improved conversion efficiency through data-driven decisions</li>
+        </ul>
+        <div class="project-tools-label">Tools</div>
+        <div class="project-tools">
+          <span class="tool-chip">Meta Ads Manager</span>
+          <span class="tool-chip">Canva</span>
+          <span class="tool-chip">Shopify</span>
+          <span class="tool-chip">Google Analytics</span>
+        </div>
+        <div class="hover-marquee"><div class="hover-marquee-track"><span>View Case Study <span class="d"></span> 3.5× Avg ROAS <span class="d"></span> 32× Top Campaign <span class="d"></span> 433 Purchases <span class="d"></span> View Case Study <span class="d"></span> 3.5× Avg ROAS <span class="d"></span> 32× Top Campaign <span class="d"></span> 433 Purchases <span class="d"></span></span></div></div>
+      </article>
+      <!-- project 3 -->
+      <article class="project-card">
+        <div class="project-meta">
+          <span class="project-cat">Content Marketing · SEO</span>
+          <span class="project-year">2026</span>
+        </div>
+        <h3 class="project-title">Content Strategy &amp; SEO</h3>
+        <p class="project-desc">Developed a long-term content strategy for a B2B services company. Conducted competitor analysis, built a content calendar, wrote SEO-optimized articles, and optimized existing pages based on search intent.</p>
+        <div class="project-stats">
+          <div><div class="pstat-num">+95%</div><div class="pstat-label">Organic Traffic</div></div>
+          <div><div class="pstat-num">40+</div><div class="pstat-label">Keywords Top 10</div></div>
+          <div><div class="pstat-num">2.5x</div><div class="pstat-label">User Engagement</div></div>
+        </div>
+        <div class="project-tools-label">Tools</div>
+        <div class="project-tools">
+          <span class="tool-chip">Ahrefs</span>
+          <span class="tool-chip">Surfer SEO</span>
+          <span class="tool-chip">Google Search Console</span>
+          <span class="tool-chip">Notion</span>
+          <span class="tool-chip">WordPress</span>
+        </div>
+        <div class="hover-marquee"><div class="hover-marquee-track"><span>View Case Study <span class="d"></span> Content Calendar <span class="d"></span> +95% Traffic <span class="d"></span> Search Intent <span class="d"></span> View Case Study <span class="d"></span> Content Calendar <span class="d"></span> +95% Traffic <span class="d"></span> Search Intent <span class="d"></span></span></div></div>
+      </article>
+      <!-- project 4 -->
+      <article class="project-card">
+        <div class="project-meta">
+          <span class="project-cat">Email Marketing · Automation</span>
+          <span class="project-year">2026</span>
+        </div>
+        <h3 class="project-title">Email Marketing Automation</h3>
+        <p class="project-desc">Implemented email automation sequences for new subscribers, abandoned cart recovery, and re-engagement. Segmented audiences by behavior and personalized content for each segment.</p>
+        <div class="project-images" data-project="email">
+          <label class="project-image-slot has-image baked"><input type="file" accept="image/*" /><img src="uploads/Screenshot 2026-05-10 204903.png" alt="Email automation flow" /></label>
+          <label class="project-image-slot has-image baked"><input type="file" accept="image/*" /><img src="uploads/Screenshot 2026-05-10 204832.png" alt="Campaign metrics" /></label>
+          <label class="project-image-slot has-image baked"><input type="file" accept="image/*" /><img src="uploads/Screenshot 2026-05-10 204813.png" alt="Email segmentation" /></label>
+        </div>
+        <div class="project-stats">
+          <div><div class="pstat-num">38%</div><div class="pstat-label">Open Rate</div></div>
+          <div><div class="pstat-num">+120%</div><div class="pstat-label">Email Revenue</div></div>
+          <div><div class="pstat-num">4.2%</div><div class="pstat-label">Click-Through</div></div>
+        </div>
+        <div class="project-tools-label">Tools</div>
+        <div class="project-tools">
+          <span class="tool-chip">Klaviyo</span>
+          <span class="tool-chip">Mailchimp</span>
+          <span class="tool-chip">Google Analytics</span>
+          <span class="tool-chip">Canva</span>
+          <span class="tool-chip">Hotjar</span>
+        </div>
+        <div class="hover-marquee"><div class="hover-marquee-track"><span>View Case Study <span class="d"></span> 38% Open Rate <span class="d"></span> Behavioral Flows <span class="d"></span> Cart Recovery <span class="d"></span> View Case Study <span class="d"></span> 38% Open Rate <span class="d"></span> Behavioral Flows <span class="d"></span> Cart Recovery <span class="d"></span></span></div></div>
+      </article>
+    </div>
+  </div>
+  <div class="carousel-dots" id="carouselDots"></div>
+</section>
+
+<!-- ========== VISUALS / GALLERY ========== -->
+<section class="section" id="visuals">
+  <div class="section-tag reveal">Visuals<span class="num">03</span></div>
+  <div class="visuals-header reveal">
+    <h2 class="visuals-title">Portfolio<br><span class="em">Gallery</span></h2>
+  </div>
+  <div class="reveal">
+    <label class="upload-zone" id="uploadZone" for="photoInput" style="display:none">
+      <input type="file" id="photoInput" accept="image/*" multiple style="display:none" />
+      <div class="upload-icon">↑</div>
+      <div class="upload-text">Drag &amp; drop photos here</div>
+      <div class="upload-sub">or click to upload — edit mode</div>
+    </label>
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-empty" id="galleryEmpty">Loading photos…</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== LINEAGE ========== -->
+<section class="section lineage-section" id="lineage">
+  <div class="section-tag reveal">Lineage<span class="num">04</span></div>
+  <div class="visuals-header reveal" style="margin-bottom:60px">
+    <h2 class="visuals-title">Professional<br><span class="em">Evolution</span></h2>
+  </div>
+  <div class="lineage-list">
+    <div class="lineage-item reveal">
+      <div class="lineage-row" onclick="this.parentElement.classList.toggle('open')">
+        <div class="lineage-num">01</div>
+        <div class="lineage-content">
+          <div class="lineage-company">Digital Marketing Manager</div>
+          <div class="lineage-role">E-commerce &amp; Growth</div>
+        </div>
+        <div class="lineage-date">2026</div>
+        <div class="lineage-toggle">⌄</div>
+      </div>
+      <div class="lineage-detail">
+        <div class="lineage-detail-inner">
+          <div class="spacer"></div>
+          <div class="lineage-desc-group">
+            <p class="lineage-desc">Running an independent marketing practice focused on SEO, paid advertising, and e-commerce growth. Managing the full marketing lifecycle — from research and strategy to execution, optimization, and performance tracking.</p>
+            <p class="lineage-desc">Working with Shopify and PrestaShop stores, building and optimizing websites, improving SEO, and scaling traffic through paid campaigns and content.</p>
+          </div>
+          <div class="lineage-artifacts">
+            <h5>Key Artifacts</h5>
+            <ul>
+              <li>SEO strategies driving consistent organic growth</li>
+              <li>Meta &amp; Google Ads campaigns optimized for conversions</li>
+              <li>Shopify &amp; PrestaShop website setup and optimization</li>
+              <li>Email &amp; SMS marketing flows (automation, segmentation)</li>
+              <li>Ad creatives and social media content design</li>
+              <li>Analytics setup (Google Analytics, Search Console)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lineage-item reveal">
+      <div class="lineage-row" onclick="this.parentElement.classList.toggle('open')">
+        <div class="lineage-num">02</div>
+        <div class="lineage-content">
+          <div class="lineage-company">Marketing &amp; Growth Specialist</div>
+          <div class="lineage-role">E-commerce Projects</div>
+        </div>
+        <div class="lineage-date">2025</div>
+        <div class="lineage-toggle">⌄</div>
+      </div>
+      <div class="lineage-detail">
+        <div class="lineage-detail-inner">
+          <div class="spacer"></div>
+          <p class="lineage-desc">Worked with e-commerce brands to improve visibility, traffic, and sales through SEO, paid ads, and content strategies. Focused on optimizing product pages, category structures, and user journeys.</p>
+          <div class="lineage-artifacts">
+            <h5>Key Artifacts</h5>
+            <ul>
+              <li>Improved organic traffic through SEO &amp; blog content</li>
+              <li>Conversion-focused product and category optimization</li>
+              <li>Meta Ads campaigns with ongoing testing &amp; scaling</li>
+              <li>Content creation for ads and social media</li>
+              <li>Internal linking and on-page SEO improvements</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lineage-item reveal">
+      <div class="lineage-row" onclick="this.parentElement.classList.toggle('open')">
+        <div class="lineage-num">03</div>
+        <div class="lineage-content">
+          <div class="lineage-company">Marketing Manager</div>
+          <div class="lineage-role">Digital Marketing</div>
+        </div>
+        <div class="lineage-date">2025</div>
+        <div class="lineage-toggle">⌄</div>
+      </div>
+      <div class="lineage-detail">
+        <div class="lineage-detail-inner">
+          <div class="spacer"></div>
+          <p class="lineage-desc">Started working with digital marketing fundamentals — managing social media, running ad campaigns, and building the foundation for SEO and analytics-driven growth.</p>
+          <div class="lineage-artifacts">
+            <h5>Key Artifacts</h5>
+            <ul>
+              <li>Launched first ad campaigns (Meta &amp; Google Ads)</li>
+              <li>Created and managed social media content</li>
+              <li>Built initial SEO structures and blog content</li>
+              <li>Basic email marketing campaigns and newsletters</li>
+              <li>Performance tracking and reporting</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lineage-item reveal">
+      <div class="lineage-row" onclick="this.parentElement.classList.toggle('open')">
+        <div class="lineage-num">04</div>
+        <div class="lineage-content">
+          <div class="lineage-company">AI &amp; Digital Marketing Program</div>
+          <div class="lineage-role">FastTrack</div>
+        </div>
+        <div class="lineage-date">2025</div>
+        <div class="lineage-toggle">⌄</div>
+      </div>
+      <div class="lineage-detail">
+        <div class="lineage-detail-inner">
+          <div class="spacer"></div>
+          <p class="lineage-desc">Completed an intensive training program focused on digital marketing and AI applications in modern marketing workflows.</p>
+          <div class="lineage-artifacts">
+            <h5>Key Learning Areas</h5>
+            <ul>
+              <li>Paid advertising (Facebook, Instagram, TikTok)</li>
+              <li>SEO strategy &amp; website optimization</li>
+              <li>Email marketing &amp; content creation</li>
+              <li>Marketing analytics &amp; data interpretation</li>
+              <li>AI tools applied in digital campaigns</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SERVICES ========== -->
+<section class="section" id="services">
+  <div class="section-tag reveal">Services<span class="num">05</span></div>
+  <div class="visuals-header reveal" style="margin-bottom: 60px">
+    <h2 class="visuals-title">Marketing<br><span class="em">Services</span></h2>
+  </div>
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <div>
+        <div class="service-num">01</div>
+        <h3 class="service-title">SEO &amp; Search Visibility</h3>
+        <p class="service-desc">Full audits, keyword research, on-page optimization, technical SEO, schema markup, and internal linking strategies that drive sustainable organic growth.</p>
+      </div>
+      <div class="service-arrow">↗</div>
+    </div>
+    <div class="service-card">
+      <div>
+        <div class="service-num">02</div>
+        <h3 class="service-title">Paid Advertising</h3>
+        <p class="service-desc">Strategic Meta &amp; Google Ads campaigns built around audience testing, creative variation, and continuous data-driven optimization to maximize ROAS.</p>
+      </div>
+      <div class="service-arrow">↗</div>
+    </div>
+    <div class="service-card">
+      <div>
+        <div class="service-num">03</div>
+        <h3 class="service-title">Content Strategy</h3>
+        <p class="service-desc">Long-term editorial planning, SEO-optimized articles, competitor analysis, and content systems that compound traffic and authority over time.</p>
+      </div>
+      <div class="service-arrow">↗</div>
+    </div>
+    <div class="service-card">
+      <div>
+        <div class="service-num">04</div>
+        <h3 class="service-title">Email &amp; Automation</h3>
+        <p class="service-desc">Newsletter programs, behavioral automation flows, segmentation, and personalization that turn subscribers into recurring revenue.</p>
+      </div>
+      <div class="service-arrow">↗</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PROCESS ========== -->
+<section class="section process-section" id="process">
+  <div class="section-tag reveal">Process<span class="num">06</span></div>
+  <div class="visuals-header reveal" style="margin-bottom: 60px">
+    <h2 class="visuals-title">How <span class="em">we work</span></h2>
+  </div>
+  <div class="journey reveal">
+    <div class="journey-path"></div>
+    <div class="journey-progress" id="journeyProgress"></div>
+
+    <div class="journey-start">— Start —</div>
+
+    <div class="journey-step">
+      <div class="journey-card">
+        <div class="journey-step-num">Step 01</div>
+        <h3 class="journey-title">Discovery &amp; Goals</h3>
+        <p class="journey-desc">We start by understanding your business, target audience, and growth goals. This helps define a clear marketing direction.</p>
+        <div class="journey-meta">Week 1</div>
+      </div>
+      <div class="journey-marker"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg></div>
+      <div class="journey-spacer"></div>
+    </div>
+
+    <div class="journey-step">
+      <div class="journey-spacer"></div>
+      <div class="journey-marker"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg></div>
+      <div class="journey-card">
+        <div class="journey-step-num">Step 02</div>
+        <h3 class="journey-title">Audit &amp; Research</h3>
+        <p class="journey-desc">I analyze your current performance, competitors, keywords, and audience behavior to identify opportunities.</p>
+        <div class="journey-meta">Week 2</div>
+      </div>
+    </div>
+
+    <div class="journey-step">
+      <div class="journey-card">
+        <div class="journey-step-num">Step 03</div>
+        <h3 class="journey-title">Strategy &amp; Planning</h3>
+        <p class="journey-desc">Based on insights, I build a tailored strategy covering SEO, ads, and content to maximize results.</p>
+        <div class="journey-meta">Week 3</div>
+      </div>
+      <div class="journey-marker"><svg viewBox="0 0 24 24"><rect x="4" y="15" width="3" height="5"/><rect x="10.5" y="10" width="3" height="10"/><rect x="17" y="5" width="3" height="15"/></svg></div>
+      <div class="journey-spacer"></div>
+    </div>
+
+    <div class="journey-step">
+      <div class="journey-spacer"></div>
+      <div class="journey-marker"><svg viewBox="0 0 24 24"><path d="M13 3L4 14h7l-1 7 9-11h-7l1-7z" stroke-linejoin="round"/></svg></div>
+      <div class="journey-card">
+        <div class="journey-step-num">Step 04</div>
+        <h3 class="journey-title">Execution</h3>
+        <p class="journey-desc">I implement SEO improvements, launch ad campaigns, and optimize content to drive traffic and engagement.</p>
+        <div class="journey-meta">Week 4–6</div>
+      </div>
+    </div>
+
+    <div class="journey-step">
+      <div class="journey-card">
+        <div class="journey-step-num">Step 05</div>
+        <h3 class="journey-title">Optimization &amp; Testing</h3>
+        <p class="journey-desc">Continuous testing of keywords, creatives, and campaigns to improve performance and conversions.</p>
+        <div class="journey-meta">Ongoing</div>
+      </div>
+      <div class="journey-marker"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></div>
+      <div class="journey-spacer"></div>
+    </div>
+
+    <div class="journey-step">
+      <div class="journey-spacer"></div>
+      <div class="journey-marker"><svg viewBox="0 0 24 24"><polyline points="3,17 9,11 13,15 21,7" stroke-linecap="round" stroke-linejoin="round"/><polyline points="15,7 21,7 21,13" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="journey-card">
+        <div class="journey-step-num">Step 06</div>
+        <h3 class="journey-title">Analysis &amp; Growth</h3>
+        <p class="journey-desc">Tracking results using analytics tools, refining strategies, and scaling what works best.</p>
+        <div class="journey-meta">Continuous</div>
+      </div>
+    </div>
+
+    <div class="journey-end">Growth Achieved <span class="arrow-down">↓</span></div>
+  </div>
+</section>
+
+<!-- ========== VOICES ========== -->
+<section class="section" id="voices">
+  <div class="section-tag reveal">Voices<span class="num">07</span></div>
+  <div class="visuals-header reveal" style="margin-bottom: 60px">
+    <h2 class="visuals-title">Client <span class="em">trust</span></h2>
+  </div>
+  <div class="voices-grid">
+    <div class="voices-stats reveal">
+      <div class="voice-stat">
+        <div class="voice-stat-num">5<span style="color:var(--ember)">+</span></div>
+        <div class="voice-stat-label">Happy Clients</div>
+      </div>
+      <div class="voice-stat">
+        <div class="voice-stat-num">4.9</div>
+        <div class="voice-stat-label">Avg Rating</div>
+      </div>
+      <div class="voice-stat">
+        <div class="voice-stat-num">100<span style="color:var(--ember)">%</span></div>
+        <div class="voice-stat-label">Project Completion</div>
+      </div>
+    </div>
+    <div class="testimonial-large reveal">
+      <div class="quote-mark">"</div>
+      <div class="testimonial-slides" id="testimonialSlides">
+        <div class="testimonial-slide active">
+          <blockquote>We're very satisfied with the results. After optimizing our SEO and launching targeted campaigns, we saw a clear increase in website traffic and overall visibility. The communication was smooth, and the improvements in SEO and blog content are showing real engagement.</blockquote>
+          <div class="testimonial-attrib">
+            <div class="attrib-mark">A</div>
+            <div>
+              <div class="attrib-name">Autoreka</div>
+              <div class="attrib-role">E-commerce Client</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-slide">
+          <blockquote>Great experience working together. Our store traffic and conversions improved after implementing SEO changes and ad campaigns. Everything was clearly explained, and the results were noticeable within a short time.</blockquote>
+          <div class="testimonial-attrib">
+            <div class="attrib-mark">E</div>
+            <div>
+              <div class="attrib-name">E-commerce Brand</div>
+              <div class="attrib-role">Shopify / PrestaShop</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-slide">
+          <blockquote>Professional, reliable, and focused on results. The campaigns were well-structured, and we started seeing more inquiries and better engagement from our audience.</blockquote>
+          <div class="testimonial-attrib">
+            <div class="attrib-mark">S</div>
+            <div>
+              <div class="attrib-name">Small Business</div>
+              <div class="attrib-role">Small Business / Local Brand</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-slide">
+          <blockquote>The ad campaigns were optimized really well. We tested different audiences and creatives, and the performance kept improving over time. Clear communication and strong results.</blockquote>
+          <div class="testimonial-attrib">
+            <div class="attrib-mark">P</div>
+            <div>
+              <div class="attrib-name">Performance Marketing Client</div>
+              <div class="attrib-role">Ads / Performance Marketing</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-nav">
+        <div class="testimonial-counter"><span class="current" id="tCurrent">01</span> / <span id="tTotal">04</span></div>
+        <div class="testimonial-arrows">
+          <button class="t-arrow" id="tPrev" aria-label="Previous testimonial">←</button>
+          <button class="t-arrow" id="tNext" aria-label="Next testimonial">→</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== NEXUS / CONTACT ========== -->
+<section class="section nexus-section" id="nexus">
+  <div class="section-tag reveal">Nexus<span class="num">08</span></div>
+  <div class="nexus-grid">
+    <div class="reveal">
+      <h2 class="nexus-title">What are<br>we <span class="em">building?</span></h2>
+      <p class="nexus-desc">I'm always open to new opportunities and exciting projects. Let's discuss how we can create something remarkable together.</p>
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">@</div>
+          <a href="mailto:d.radvilas@gmail.com">d.radvilas@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">⌖</div>
+          <span>Available Worldwide</span>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">☎</div>
+          <a href="tel:+37067197785">+370 671 97785</a>
+        </div>
+      </div>
+    </div>
+    <form class="form reveal" id="contactForm" novalidate>
+      <div class="form-row">
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required />
+          <div class="field-error">Name required</div>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required />
+          <div class="field-error">Valid email required</div>
+        </div>
+      </div>
+      <div class="field">
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="subject" placeholder="What's this about?" />
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Tell me about your project…" required></textarea>
+        <div class="field-error">Message required</div>
+      </div>
+      <button type="submit" class="submit-btn" id="submitBtn">Send Inquiry <span>↗</span></button>
+      <div class="form-success" id="formSuccess">Thanks — your message has been received. I'll get back to you within 24 hours.</div>
+    </form>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer">
+  <div class="footer-row">
+    <div class="footer-brand">Deividas<span class="dot">.</span></div>
+    <div class="footer-social">
+      <a href="#">LinkedIn</a>
+      <a href="#">Instagram</a>
+      <a href="#">Twitter</a>
+      <a href="#">Facebook</a>
+    </div>
+    <button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to Top ↑</button>
+  </div>
+  <div class="footer-row" style="margin-top:32px;padding-top:24px;border-top:1px solid rgba(242,237,226,0.08)">
+    <div class="footer-copy">© 2026 Deividas Radvilas — All rights reserved</div>
+    <div class="footer-copy">Crafted with intent.</div>
+  </div>
+</footer>
+
+<!-- ========== LIGHTBOX ========== -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lightbox-close" type="button" id="lightboxClose" aria-label="Close">×</button>
+  <img id="lightboxImg" alt="" />
+  <div class="lightbox-hint">click anywhere or press esc to close</div>
+</div>
+
+<script>
+  // -------- Magnetic buttons --------
+  document.querySelectorAll('.cta-btn, .btn-secondary, .submit-btn, .carousel-btn, .back-top').forEach(btn => {
+    btn.classList.add('magnetic');
+    btn.addEventListener('mousemove', (e) => {
+      const r = btn.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width/2;
+      const y = e.clientY - r.top - r.height/2;
+      btn.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
+    });
+    btn.addEventListener('mouseleave', () => { btn.style.transform = 'translate(0,0)'; });
+  });
+
+  // -------- Hero title letter split --------
+  document.querySelectorAll('.hero-title').forEach(h => {
+    h.querySelectorAll('span, br').forEach(() => {});
+    // wrap each visible text node's chars in spans
+    function wrap(node) {
+      [...node.childNodes].forEach(child => {
+        if (child.nodeType === 3) {
+          const txt = child.textContent;
+          const frag = document.createDocumentFragment();
+          [...txt].forEach(ch => {
+            if (ch === ' ') { frag.appendChild(document.createTextNode(' ')); return; }
+            const s = document.createElement('span');
+            s.className = 'letter';
+            s.textContent = ch;
+            frag.appendChild(s);
+          });
+          child.replaceWith(frag);
+        } else if (child.nodeType === 1 && child.tagName !== 'BR') {
+          wrap(child);
+        }
+      });
+    }
+    wrap(h);
+  });
+
+  // -------- Scroll progress --------
+  const progressBar = document.getElementById('scrollProgressBar');
+  function updateProgress() {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = (scrolled / total * 100) + '%';
+  }
+  window.addEventListener('scroll', updateProgress);
+  updateProgress();
+
+  // -------- Testimonial carousel --------
+  const tSlides = document.querySelectorAll('.testimonial-slide');
+  const tCurrent = document.getElementById('tCurrent');
+  const tPrev = document.getElementById('tPrev');
+  const tNext = document.getElementById('tNext');
+  let tIdx = 0;
+  function showT(i) {
+    tIdx = (i + tSlides.length) % tSlides.length;
+    tSlides.forEach((s, k) => s.classList.toggle('active', k === tIdx));
+    if (tCurrent) tCurrent.textContent = String(tIdx + 1).padStart(2, '0');
+  }
+  if (tPrev) tPrev.onclick = () => showT(tIdx - 1);
+  if (tNext) tNext.onclick = () => showT(tIdx + 1);
+
+  // -------- 3D tilt on testimonial cards --------
+  document.querySelectorAll('.testimonial-card, .testimonial-large').forEach(card => {
+    card.classList.add('tilt-card');
+    card.addEventListener('mousemove', (e) => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `perspective(1000px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+  });
+
+  // -------- Reveal on scroll --------
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // -------- Active nav --------
+  const navLinks = document.querySelectorAll('.nav-links a[data-nav]');
+  const sections = ['about','projects','lineage','services','nexus'].map(id => document.getElementById(id));
+  function updateNav() {
+    const y = window.scrollY + 200;
+    let active = null;
+    sections.forEach(s => { if (s && s.offsetTop <= y) active = s.id; });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + active);
+    });
+  }
+  window.addEventListener('scroll', updateNav);
+  updateNav();
+
+  // -------- Carousel --------
+  const track = document.getElementById('carouselTrack');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const dotsHost = document.getElementById('carouselDots');
+  const cards = track.children;
+  const cardCount = cards.length;
+  // 2 visible at a time desktop, 1 mobile
+  function getPerView() { return window.innerWidth <= 1024 ? 1 : 2; }
+  let index = 0;
+  function maxIndex() { return Math.max(0, cardCount - getPerView()); }
+  function update() {
+    const card = cards[0];
+    const cardW = card.offsetWidth;
+    const gap = 32;
+    const offset = index * (cardW + gap);
+    track.style.transform = `translateX(-${offset}px)`;
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index >= maxIndex();
+    [...dotsHost.children].forEach((d, i) => d.classList.toggle('active', i === index));
+  }
+  function buildDots() {
+    dotsHost.innerHTML = '';
+    const total = maxIndex() + 1;
+    for (let i = 0; i < total; i++) {
+      const b = document.createElement('button');
+      b.className = 'carousel-dot';
+      b.onclick = () => { index = i; update(); };
+      dotsHost.appendChild(b);
+    }
+    update();
+  }
+  prevBtn.onclick = () => { index = Math.max(0, index - 1); update(); };
+  nextBtn.onclick = () => { index = Math.min(maxIndex(), index + 1); update(); };
+  buildDots();
+  window.addEventListener('resize', () => { index = Math.min(index, maxIndex()); buildDots(); });
+
+  // -------- Journey progress + step reveal --------
+  const journeySteps = document.querySelectorAll('.journey-step');
+  const journeyProgress = document.getElementById('journeyProgress');
+  function updateJourney() {
+    const journey = document.querySelector('.journey');
+    if (!journey || !journeyProgress) return;
+    const r = journey.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const total = r.height;
+    const visible = Math.min(Math.max(vh * 0.5 - r.top, 0), total);
+    journeyProgress.style.height = (visible / total * 100) + '%';
+    journeySteps.forEach(step => {
+      const sr = step.getBoundingClientRect();
+      if (sr.top < vh * 0.75) step.classList.add('visible');
+    });
+  }
+  window.addEventListener('scroll', updateJourney);
+  updateJourney();
+
+  // -------- Lightbox --------
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxClose = document.getElementById('lightboxClose');
+  function openLightbox(src) {
+    lightboxImg.src = src;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => { lightboxImg.src = ''; }, 250);
+  }
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightboxClose || e.target === lightbox || e.target.classList.contains('lightbox-hint')) closeLightbox();
+  });
+  lightboxClose.addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+  });
+
+  // -------- Project image slot uploads --------
+  document.querySelectorAll('.project-image-slot').forEach(slot => {
+    const input = slot.querySelector('input[type=file]');
+    // Click handler: when image is loaded, open lightbox instead of file picker
+    slot.addEventListener('click', (e) => {
+      if (slot.classList.contains('has-image')) {
+        const img = slot.querySelector('img');
+        if (img && !e.target.classList.contains('remove-img')) {
+          e.preventDefault();
+          openLightbox(img.src);
+        }
+      }
+    });
+    input.addEventListener('change', (e) => {
+      const f = e.target.files[0];
+      if (!f || !f.type.startsWith('image/')) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const ph = slot.querySelector('.placeholder-text');
+        if (ph) ph.remove();
+        const existing = slot.querySelector('img');
+        if (existing) existing.remove();
+        const existingBtn = slot.querySelector('.remove-img');
+        if (existingBtn) existingBtn.remove();
+        const img = document.createElement('img');
+        img.src = ev.target.result;
+        slot.appendChild(img);
+        slot.classList.add('has-image');
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'remove-img';
+        btn.textContent = '×';
+        btn.onclick = (evt) => {
+          evt.preventDefault();
+          evt.stopPropagation();
+          img.remove(); btn.remove();
+          slot.classList.remove('has-image');
+          input.value = '';
+          const p = document.createElement('span');
+          p.className = 'placeholder-text';
+          p.textContent = '[ + add image ]';
+          slot.appendChild(p);
+        };
+        slot.appendChild(btn);
+      };
+      reader.readAsDataURL(f);
+    });
+  });
+
+  // -------- Photo Gallery (baked-in photos + optional localStorage extras) --------
+  const BAKED_PHOTOS = [
+    'uploads/Screenshot 2026-04-29 144107.png',
+    'uploads/Screenshot 2026-04-29 143739.png',
+    'uploads/Screenshot 2026-04-29 143446.png',
+    'uploads/Screenshot 2026-04-29 115401.png',
+    'uploads/Q5fCJX87YvVjUQ9kCiBLgonUE38.avif',
+    'uploads/Screenshot 2026-04-28 101144.png',
+    'uploads/Screenshot 2026-05-11 212956.png',
+    'uploads/Screenshot 2026-05-11 203031.png'
+  ];
+  const STORAGE_KEY = 'portfolioGalleryPhotos_v1';
+  const isEditMode = new URLSearchParams(location.search).has('edit');
+  const photoInput = document.getElementById('photoInput');
+  const uploadZone = document.getElementById('uploadZone');
+  const galleryGrid = document.getElementById('galleryGrid');
+
+  let extraPhotos = [];
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) extraPhotos = JSON.parse(saved) || [];
+  } catch (e) { extraPhotos = []; }
+  let photos = [...BAKED_PHOTOS, ...extraPhotos];
+
+  function savePhotos() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(extraPhotos)); }
+    catch (e) { console.warn('Could not save photos:', e); }
+  }
+
+  if (isEditMode) {
+    uploadZone.style.display = '';
+  }
+
+  function renderGallery() {
+    galleryGrid.innerHTML = '';
+    if (photos.length === 0) {
+      const empty = document.createElement('div');
+      empty.className = 'gallery-empty';
+      empty.textContent = isEditMode ? 'No photos yet — upload some above' : 'No photos yet';
+      galleryGrid.appendChild(empty);
+      return;
+    }
+    photos.forEach((p, i) => {
+      const item = document.createElement('div');
+      item.className = 'gallery-item';
+      const removeBtn = isEditMode
+        ? `<button class="remove" data-i="${i}" aria-label="Remove">×</button>`
+        : '';
+      item.innerHTML = `<img src="${p}" alt="" />${removeBtn}`;
+      if (isEditMode) {
+        item.querySelector('.remove').onclick = (e) => {
+          e.stopPropagation();
+          if (i >= BAKED_PHOTOS.length) {
+            extraPhotos.splice(i - BAKED_PHOTOS.length, 1);
+            savePhotos();
+            photos = [...BAKED_PHOTOS, ...extraPhotos];
+            renderGallery();
+          }
+        };
+      }
+      item.querySelector('img').onclick = (e) => {
+        e.stopPropagation();
+        openLightbox(p);
+      };
+      item.style.cursor = 'zoom-in';
+      galleryGrid.appendChild(item);
+    });
+  }
+
+  function handleFiles(files) {
+    if (!isEditMode) return;
+    [...files].forEach(file => {
+      if (!file.type.startsWith('image/')) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        extraPhotos.push(e.target.result);
+        savePhotos();
+        photos = [...BAKED_PHOTOS, ...extraPhotos];
+        renderGallery();
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  renderGallery();
+
+  if (isEditMode) {
+    photoInput.addEventListener('change', (e) => handleFiles(e.target.files));
+    ['dragenter', 'dragover'].forEach(evt =>
+      uploadZone.addEventListener(evt, (e) => { e.preventDefault(); uploadZone.classList.add('dragover'); })
+    );
+    ['dragleave', 'drop'].forEach(evt =>
+      uploadZone.addEventListener(evt, (e) => { e.preventDefault(); uploadZone.classList.remove('dragover'); })
+    );
+    uploadZone.addEventListener('drop', (e) => handleFiles(e.dataTransfer.files));
+  }
+
+  // -------- Contact form --------
+  const form = document.getElementById('contactForm');
+  const successMsg = document.getElementById('formSuccess');
+  const submitBtn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const fields = form.querySelectorAll('.field');
+    let ok = true;
+    fields.forEach(f => f.classList.remove('error'));
+
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+
+    if (!name) { form.name.closest('.field').classList.add('error'); ok = false; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { form.email.closest('.field').classList.add('error'); ok = false; }
+    if (!message) { form.message.closest('.field').classList.add('error'); ok = false; }
+
+    if (!ok) return;
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Sending… <span>↗</span>';
+    setTimeout(() => {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'Send Inquiry <span>↗</span>';
+      form.reset();
+      successMsg.classList.add('show');
+      setTimeout(() => successMsg.classList.remove('show'), 6000);
+    }, 1100);
+  });
+</script>
+
+</body>
+</html>
